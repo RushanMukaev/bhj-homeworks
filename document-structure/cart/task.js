@@ -10,7 +10,7 @@ function productQuantControl(el) {
     const quantValue = el.querySelector('.product__quantity-value')
     
     quantDec.addEventListener('click', () => {
-        if(quantValue.innerText < 1) {
+        if(quantValue.innerText <= 1) {
             return;
         } 
         quantValue.innerText -=  1;
@@ -32,11 +32,7 @@ function add(el) {
         
         console.log(id)
         if(cartProduct.find((i) => {
-            if(i.dataset.id == id) {
-                return true;
-            } else {
-                return false;
-            }
+            return i.dataset.id == id
         })) {
 
             const prodId = cartProducts.querySelector(`[data-id="${id}"]`)
@@ -44,21 +40,11 @@ function add(el) {
             countId.textContent = Number(quantValue.textContent) + Number(countId.textContent)
 
         } else {
-            let div = document.createElement('div');
-            div.classList.add('cart__product');
-            div.dataset.id = id
-    
-            let img = document.createElement('img');
-            img.classList.add('cart__product-image');
-            img.src = productImage.src;
-            div.appendChild(img);
-    
-            let count = document.createElement('div');
-            count.classList.add('cart__product-count');
-            count.innerText = quantValue.innerText;
-            div.appendChild(count);
-    
-            cartProducts.appendChild(div);   
+            cartProducts.innerHTML +=
+                `<div class="cart__product" data-id="${id}">
+                <img class="cart__product-image" src="${productImage.src}">
+                <div class="cart__product-count">${quantValue.innerText}</div>
+                </div>` 
         }
         quantValue.innerText = 1;
     })

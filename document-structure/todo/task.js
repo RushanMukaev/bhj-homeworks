@@ -8,28 +8,31 @@ if(localStorage.test) {
     taskList.innerHTML = localStorage.test;
 }
 
+let taskRemove = [];
+
 btn.addEventListener('click', (e) => {
     e.preventDefault();
-    if(inp.value) {
-        let task = document.createElement('div');
-        task.classList.add('task');
-        
-        let taskTittle = document.createElement('div');
-        taskTittle.classList.add('task__title');
-        taskTittle.textContent = `${inp.value}`;
-        task.appendChild(taskTittle);
-        
-        let taskRemove = document.createElement('a');
-        taskRemove.classList.add('task__remove');
-        taskRemove.href = '#';
-        taskRemove.innerHTML = '&times;'
-        taskRemove.addEventListener('click', () => {
-            task.remove();
-        })
-        task.appendChild(taskRemove);
-        
-        taskList.appendChild(task);
-        form.reset();
+    if(!inp.value) {
+        return;
     }
+        taskList.innerHTML += 
+         `<div class="task">
+            <div class="task__title">
+              ${inp.value}
+            </div>
+            <a href="#" class="task__remove">&times;</a>
+          </div>`
+        
+        form.reset();
+
+        taskRemove = document.querySelectorAll('.task__remove')
+        taskRemove.forEach((el) => {
+            el.addEventListener('click', () => {
+                el.parentElement.remove();
+                localStorage.test = document.querySelector('.tasks__list').innerHTML;
+            })
+        })    
+        
+
     localStorage.test = document.querySelector('.tasks__list').innerHTML;
 })
