@@ -8,26 +8,12 @@ xhr.addEventListener('readystatechange', () => {
 
         let parsed = JSON.parse(xhr.responseText).response.Valute;
         Object.keys(parsed).forEach((el) => {
-            
-            let item = document.createElement('div');
-            item.classList.add('item');
-            
-            let itemCode = document.createElement('div');
-            itemCode.classList.add('item__code');
-            itemCode.textContent = `${parsed[el].CharCode}`;
-            item.appendChild(itemCode);
-            
-            let itemValue = document.createElement('div');
-            itemValue.classList.add('item__value');
-            itemValue.textContent = `${parsed[el].Value}`;
-            item.appendChild(itemValue);
-            
-            let itemCurrency = document.createElement('div');
-            itemCurrency.classList.add('item__currency');
-            itemCurrency.textContent = `руб.`;
-            item.appendChild(itemCurrency);
-            
-            items.appendChild(item);
+            items.innerHTML +=`
+            <div class="item">
+                <div class="item__code">${parsed[el].CharCode}</div>
+                <div class="item__value">${parsed[el].Value}</div>
+                <div class="item__currency">руб.</div>
+            </div>`
         })
     }
 })
