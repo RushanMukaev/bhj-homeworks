@@ -31,9 +31,7 @@ function add(el) {
         const cartProduct = [...document.querySelectorAll('.cart__product')]
         
         console.log(id)
-        if(cartProduct.find((i) => {
-            return i.dataset.id == id
-        })) {
+        if(cartProduct.find((i) => i.dataset.id == id)) {
 
             const prodId = cartProducts.querySelector(`[data-id="${id}"]`)
             const countId = prodId.querySelector('.cart__product-count')

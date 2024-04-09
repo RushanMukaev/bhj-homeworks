@@ -12,16 +12,16 @@ let taskRemove = [];
 
 btn.addEventListener('click', (e) => {
     e.preventDefault();
-    if(!inp.value) {
+    if(!inp.value.trim()) {
         return;
     }
-        taskList.innerHTML += 
+    taskList.insertAdjacentHTML('beforeend',
          `<div class="task">
             <div class="task__title">
               ${inp.value}
             </div>
             <a href="#" class="task__remove">&times;</a>
-          </div>`
+          </div>`)
         
         form.reset();
 

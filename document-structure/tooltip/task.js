@@ -9,13 +9,20 @@ a.forEach( (element) => {
 
     element.addEventListener('click', (e) => {
         e.preventDefault();
-        const b = [...document.querySelectorAll('.tooltip')];
-        for (let i = 0; i < a.length; i++) {
-            b[i].classList.remove('tooltip_active');
-            
-        }
+
         const { left, bottom } = element.getBoundingClientRect();
         div.style = `left: ${left}px; top: ${bottom}px`;
-        div.classList.toggle('tooltip_active');
+
+        if(div.classList.contains('tooltip_active')) {
+            div.classList.remove('tooltip_active')
+        } else {
+            const b = [...document.querySelectorAll('.tooltip')];
+            for (let i = 0; i < a.length; i++) {
+            if(b[i].classList.contains('tooltip_active')) {
+                b[i].classList.remove('tooltip_active')
+            };
+        }
+            div.classList.add('tooltip_active');
+        }
     })
 });
